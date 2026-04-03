@@ -54,9 +54,3 @@ C:\xampp\php\php.exe artisan serve
 - Aplicacion Laravel: `http://127.0.0.1:8000/up`
 - API base: `http://127.0.0.1:8000/api/health`
 
-## Siguientes pasos naturales
-
-- crear migraciones para clubes, jugadores y competiciones
-- definir modelos Eloquent y relaciones
-- exponer controladores REST para Angular
-- anadir validaciones y seeders de ejemplo
