@@ -1,9 +1,9 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "laravel/laravel",
+    "name": "liga-deportiva/backend",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "description": "Backend Laravel para la Liga Deportiva del IES Maestre de Calatrava.",
+    "keywords": ["laravel", "liga", "deportiva", "api"],
     "license": "MIT",
     "require": {
         "php": "^8.2",
@@ -35,6 +35,7 @@
         "setup": [
             "composer install",
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+            "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
             "@php artisan key:generate",
             "@php artisan migrate --force",
             "npm install",

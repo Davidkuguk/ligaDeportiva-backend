@@ -2,7 +2,8 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+// Descomenta esta linea si en algun momento quieres obligar
+// a que los usuarios verifiquen su correo electronico.
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -14,7 +15,7 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
 
     /**
-     * The attributes that are mass assignable.
+     * Atributos que se pueden asignar de forma masiva.
      *
      * @var list<string>
      */
@@ -22,10 +23,11 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'rol',
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
+     * Atributos que deben ocultarse al serializar el modelo.
      *
      * @var list<string>
      */
@@ -35,7 +37,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the attributes that should be cast.
+     * Devuelve los atributos que deben convertirse automaticamente.
      *
      * @return array<string, string>
      */
@@ -45,5 +47,13 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Comprueba si el usuario tiene rol de administrador.
+     */
+    public function esAdministrador(): bool
+    {
+        return $this->rol === 'administrador';
     }
 }

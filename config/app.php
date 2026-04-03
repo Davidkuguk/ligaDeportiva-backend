@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Liga Deportiva Backend'),
 
     /*
     |--------------------------------------------------------------------------
@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Europe/Madrid',
 
     /*
     |--------------------------------------------------------------------------
@@ -122,5 +122,18 @@ return [
         'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
+
+    /*
+    |----------------------------------------------------------------------
+    | Demo Admin Key
+    |----------------------------------------------------------------------
+    |
+    | Esta clave permite desbloquear temporalmente las rutas protegidas
+    | durante demostraciones en Postman sin tener un login completo.
+    | Cuando ya exista autenticacion real, conviene dejarla vacia.
+    |
+    */
+
+    'demo_admin_key' => env('DEMO_ADMIN_KEY', ''),
 
 ];

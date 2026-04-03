@@ -2,24 +2,23 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
-
     /**
      * Seed the application's database.
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        // Este seeder principal solo coordina el orden.
+        // Primero creamos clubes, luego jugadores, despues la liga
+        // y por ultimo los partidos, porque estos dependen de todo lo anterior.
+        $this->call([
+            ClubSeeder::class,
+            JugadorSeeder::class,
+            LigaSeeder::class,
+            PartidoSeeder::class,
         ]);
     }
 }
