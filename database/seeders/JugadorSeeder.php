@@ -9,7 +9,7 @@ use Illuminate\Database\Seeder;
 class JugadorSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Inserta jugadores de ejemplo para cada club.
      */
     public function run(): void
     {
