@@ -11,3 +11,5 @@ RUN php artisan config:clear
 RUN chmod -R 775 storage bootstrap/cache
 
 ENV WEBROOT /var/www/html/public
+
+CMD php artisan migrate --force && php artisan db:seed --force && /start.sh
