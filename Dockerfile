@@ -8,6 +8,8 @@ RUN composer install --no-dev --optimize-autoloader
 
 RUN php artisan config:clear
 
+RUN mkdir -p storage/logs storage/framework/cache storage/framework/sessions storage/framework/views bootstrap/cache
+
 RUN chmod -R 775 storage bootstrap/cache
 
 ENV WEBROOT /var/www/html/public
