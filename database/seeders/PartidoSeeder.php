@@ -10,7 +10,7 @@ use Illuminate\Database\Seeder;
 class PartidoSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Inserta partidos de ejemplo relacionados con la liga y los clubes.
      */
     public function run(): void
     {

@@ -8,7 +8,7 @@ use Illuminate\Database\Seeder;
 class ClubSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Inserta los clubes de ejemplo del proyecto.
      */
     public function run(): void
     {

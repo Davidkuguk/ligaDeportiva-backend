@@ -29,6 +29,32 @@ En este entregable queda creada la estructura inicial de Laravel 12 con:
 - `routes/`: rutas web, consola y API
 - `tests/`: pruebas automaticas
 
+## Estrategia de pruebas automatizadas
+
+En este repositorio se ha automatizado la validacion del backend Laravel con tres niveles:
+
+- pruebas unitarias para modelos y reglas de dominio del modulo `Jugadores`
+- pruebas de integracion/feature sobre la API REST con base de datos en memoria
+- pruebas E2E orientadas al backend, cubriendo el flujo HTTP completo del recurso `/api/jugadores`
+
+La aplicacion cliente Angular no esta incluida en este workspace, asi que las pruebas del frontend y sus llamadas HTTP simuladas tendran que vivir en el repositorio del cliente cuando este disponible.
+
+### Ejecutar la bateria de pruebas
+
+```powershell
+php artisan test
+```
+
+Si `php` no esta en el `PATH`, usa la ruta absoluta del ejecutable de tu entorno local.
+
+### Integracion continua
+
+GitHub Actions ejecuta automaticamente:
+
+- estilo PHP con `Pint`
+- suite de pruebas Laravel en PHP 8.2, 8.3 y 8.4
+- compilacion de assets con `npm run build`
+
 ## Requisitos
 
 - PHP 8.2 o superior
@@ -53,4 +79,3 @@ C:\xampp\php\php.exe artisan serve
 
 - Aplicacion Laravel: `http://127.0.0.1:8000/up`
 - API base: `http://127.0.0.1:8000/api/health`
-

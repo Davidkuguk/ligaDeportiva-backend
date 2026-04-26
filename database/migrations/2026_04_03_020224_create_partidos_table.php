@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * Crea la tabla de partidos.
      */
     public function up(): void
     {
@@ -36,7 +36,7 @@ return new class extends Migration
     }
 
     /**
-     * Reverse the migrations.
+     * Deshace la migracion eliminando la tabla.
      */
     public function down(): void
     {

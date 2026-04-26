@@ -8,7 +8,7 @@ use Illuminate\Database\Seeder;
 class LigaSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Inserta una liga de ejemplo para hacer pruebas y demos.
      */
     public function run(): void
     {
