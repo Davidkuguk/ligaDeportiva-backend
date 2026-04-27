@@ -4,6 +4,8 @@ COPY . /var/www/html
 
 WORKDIR /var/www/html
 
+COPY docker/nginx-site.conf /etc/nginx/sites-available/default.conf
+
 ENV WEBROOT=/var/www/html/public
 ENV VIEW_COMPILED_PATH=/var/www/html/storage/framework/views
 
