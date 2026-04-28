@@ -15,7 +15,7 @@ class JugadorModelTest extends TestCase
     {
         // Este modelo necesita el nombre de tabla manual
         // porque Laravel no pluraliza bien "Jugador".
-        $jugador = new Jugador();
+        $jugador = new Jugador;
 
         $this->assertSame('jugadores', $jugador->getTable());
     }
@@ -24,7 +24,7 @@ class JugadorModelTest extends TestCase
     {
         // Creamos una instancia vacia para comprobar
         // que el modelo permite asignar solo los campos esperados.
-        $jugador = new Jugador();
+        $jugador = new Jugador;
 
         $this->assertSame([
             'nombre',

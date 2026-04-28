@@ -69,6 +69,13 @@ class JugadorControllerTest extends TestCase
             ->assertJsonPath('data.club.nombre', 'Club Calatrava');
     }
 
+    public function test_show_returns_not_found_when_the_player_does_not_exist(): void
+    {
+        // Compruebo el comportamiento de la API cuando se pide un id inexistente.
+        $this->getJson('/api/jugadores/999')
+            ->assertNotFound();
+    }
+
     public function test_store_creates_a_player_and_returns_the_created_resource(): void
     {
         // Necesito un admin porque este endpoint esta protegido.

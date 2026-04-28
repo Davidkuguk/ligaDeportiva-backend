@@ -1,5 +1,7 @@
 name: Tests
 
+# Este workflow se ejecuta automaticamente para comprobar que el backend
+# sigue funcionando cuando se suben cambios al repositorio.
 on:
   push:
     branches:
@@ -24,6 +26,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
+          # Usamos PHP 8.3 para revisar el estilo del codigo.
           php-version: '8.3'
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite
           coverage: none
@@ -36,9 +39,18 @@ jobs:
 
   tests:
     runs-on: ubuntu-latest
+    # Estas variables obligan a Laravel a usar una base de datos SQLite
+    # temporal para los tests. Asi no se toca la base de datos real.
+    env:
+      APP_ENV: testing
+      DB_CONNECTION: sqlite
+      DB_DATABASE: ':memory:'
+      DATABASE_URL: ''
+      DB_URL: ''
 
     strategy:
       fail-fast: true
+      # Probamos varias versiones de PHP para detectar incompatibilidades.
       matrix:
         php: [8.2, 8.3, 8.4]
 
@@ -52,6 +64,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
+          # pdo_sqlite es necesario para que RefreshDatabase funcione en CI.
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite
           coverage: none
 
@@ -64,8 +77,13 @@ jobs:
       - name: Generate app key
         run: php artisan key:generate
 
-      - name: Execute tests
-        run: php artisan test
+      # Primero se ejecutan las pruebas unitarias: modelos, servicios y logica aislada.
+      - name: Execute unit tests
+        run: php artisan test --testsuite=Unit
+
+      # Despues se ejecutan las Feature Tests: endpoints reales de la API.
+      - name: Execute feature tests
+        run: php artisan test --testsuite=Feature
 
   assets:
     runs-on: ubuntu-latest
@@ -77,6 +95,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
+          # Node se usa para compilar los assets gestionados por Vite.
           node-version: 22
 
       - name: Install NPM dependencies

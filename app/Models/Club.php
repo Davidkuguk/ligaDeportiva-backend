@@ -2,11 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Club extends Model
 {
+    // HasFactory permite usar Club::factory() dentro de los tests.
+    use HasFactory;
+
     // fillable indica los campos que Laravel permite rellenar de golpe
     // cuando usamos create(), update() o metodos parecidos.
     // Esto nos protege frente a asignaciones masivas no deseadas.

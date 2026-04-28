@@ -2,11 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Jugador extends Model
 {
+    // HasFactory permite crear jugadores falsos con Jugador::factory().
+    use HasFactory;
+
     // Laravel habria intentado usar "jugadors" como nombre de tabla
     // por la forma inglesa del plural.
     // Como nuestra tabla real se llama "jugadores", lo indicamos a mano.
