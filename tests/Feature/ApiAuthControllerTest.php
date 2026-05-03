@@ -50,4 +50,43 @@ class ApiAuthControllerTest extends TestCase
         $this->assertTrue($admin->esAdministrador());
         $this->assertTrue(Hash::check('admin', $admin->password));
     }
+
+    public function test_public_registration_cannot_create_admin_users(): void
+    {
+        $this->postJson('/api/auth/register', [
+            'firstName' => 'Nuevo',
+            'lastName' => 'Admin',
+            'username' => 'nuevoadmin',
+            'password' => '1234',
+            'tipo' => 'admin',
+        ])
+            ->assertForbidden()
+            ->assertJsonPath('message', 'Solo un administrador puede crear otros administradores.');
+    }
+
+    public function test_admin_token_can_create_another_admin_user(): void
+    {
+        $admin = User::create([
+            'name' => 'Admin Liga',
+            'username' => 'admin',
+            'email' => 'admin@liga.local',
+            'password' => Hash::make('admin'),
+            'rol' => 'administrador',
+            'api_token' => hash('sha256', 'token-admin'),
+        ]);
+
+        $this->assertTrue($admin->esAdministrador());
+
+        $this->withToken('token-admin')
+            ->postJson('/api/auth/register', [
+                'firstName' => 'Segundo',
+                'lastName' => 'Admin',
+                'username' => 'segundoadmin',
+                'password' => '1234',
+                'tipo' => 'admin',
+            ])
+            ->assertCreated()
+            ->assertJsonPath('user.username', 'segundoadmin')
+            ->assertJsonPath('user.tipo', 'admin');
+    }
 }

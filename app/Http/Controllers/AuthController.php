@@ -22,6 +22,12 @@ class AuthController extends Controller
             'teamName' => ['nullable', 'string', 'max:255'],
         ]);
 
+        if ($datos['tipo'] === 'admin' && ! $this->requestHasAdminToken($request)) {
+            return response()->json([
+                'message' => 'Solo un administrador puede crear otros administradores.',
+            ], 403);
+        }
+
         $username = Str::lower($datos['username']);
 
         $user = User::create([
@@ -84,6 +90,19 @@ class AuthController extends Controller
             'teamName' => $user->team_name,
             'createdAt' => $user->created_at?->toISOString(),
         ];
+    }
+
+    private function requestHasAdminToken(Request $request): bool
+    {
+        $token = (string) $request->bearerToken();
+
+        if ($token === '') {
+            return false;
+        }
+
+        $user = User::where('api_token', hash('sha256', $token))->first();
+
+        return (bool) $user?->esAdministrador();
     }
 
     private function toBackendRole(string $tipo): string
