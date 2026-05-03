@@ -17,6 +17,6 @@ RUN chown -R nginx:nginx storage bootstrap/cache || chown -R www-data:www-data s
 
 RUN composer install --no-dev --optimize-autoloader
 
-RUN php artisan config:clear
+RUN php artisan config:clear && php artisan route:clear && php artisan view:clear
 
-CMD mkdir -p storage/logs storage/framework/cache storage/framework/sessions storage/framework/views bootstrap/cache && chmod -R 775 storage bootstrap/cache && php artisan config:clear && php artisan migrate --force && php artisan db:seed --force && /start.sh
+CMD mkdir -p storage/logs storage/framework/cache storage/framework/sessions storage/framework/views bootstrap/cache && if [ "$DB_CONNECTION" = "sqlite" ]; then mkdir -p "$(dirname "$DB_DATABASE")" && touch "$DB_DATABASE"; fi && chmod -R 775 storage bootstrap/cache && php artisan optimize:clear && php artisan migrate --force && php artisan db:seed --force && php artisan optimize && /start.sh

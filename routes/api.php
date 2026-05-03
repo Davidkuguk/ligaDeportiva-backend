@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClubController;
 use App\Http\Controllers\JugadorController;
 use App\Http\Controllers\LigaController;
@@ -14,6 +15,9 @@ Route::get('/health', function (): JsonResponse {
         'framework' => app()->version(),
     ]);
 });
+
+Route::post('/auth/register', [AuthController::class, 'register']);
+Route::post('/auth/login', [AuthController::class, 'login']);
 
 // apiResource crea automaticamente las rutas REST tipicas:
 // index, store, show, update y destroy.

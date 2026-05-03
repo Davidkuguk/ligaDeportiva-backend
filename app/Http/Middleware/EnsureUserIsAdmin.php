@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,6 +29,16 @@ class EnsureUserIsAdmin
             && hash_equals($demoAdminKeyConfigurada, $demoAdminKeyRecibida)
         ) {
             return $next($request);
+        }
+
+        $token = (string) $request->bearerToken();
+
+        if ($token !== '') {
+            $user = User::where('api_token', hash('sha256', $token))->first();
+
+            if ($user) {
+                $request->setUserResolver(fn () => $user);
+            }
         }
 
         // Si no hay usuario autenticado, devolvemos error 401.

@@ -19,11 +19,10 @@ return [
     // Permitimos GET, POST, PUT, DELETE, OPTIONS, etc.
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => [
-        // En desarrollo Angular suele arrancar en http://localhost:4200.
-        // Si cambia la URL del frontend, se puede modificar con FRONTEND_URL.
-        env('FRONTEND_URL', 'http://localhost:4200'),
-    ],
+    'allowed_origins' => array_filter(array_map(
+        'trim',
+        explode(',', env('FRONTEND_URLS', env('FRONTEND_URL', 'http://localhost:4200')))
+    )),
 
     'allowed_origins_patterns' => [],
 
