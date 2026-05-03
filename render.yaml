@@ -16,7 +16,7 @@ services:
       - key: APP_URL
         value: https://liga-mestre-api.onrender.com
       - key: FRONTEND_URLS
-        value: https://ligadeportivafront.netlify.app,https://liga-deportiva-front.onrender.com,http://localhost:4200,http://127.0.0.1:4200
+        value: https://ligadeportiva2.onrender.com,https://ligadeportivafront.netlify.app,https://liga-deportiva-front.onrender.com,http://localhost:4200,http://127.0.0.1:4200
       - key: DB_CONNECTION
         value: pgsql
       - key: DATABASE_URL

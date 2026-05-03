@@ -34,7 +34,7 @@ Variables principales configuradas en Render:
 APP_ENV=production
 APP_DEBUG=false
 APP_URL=https://liga-mestre-api.onrender.com
-FRONTEND_URLS=https://ligadeportivafront.netlify.app,https://liga-deportiva-front.onrender.com,http://localhost:4200,http://127.0.0.1:4200
+FRONTEND_URLS=https://ligadeportiva2.onrender.com,https://ligadeportivafront.netlify.app,https://liga-deportiva-front.onrender.com,http://localhost:4200,http://127.0.0.1:4200
 DB_CONNECTION=pgsql
 DATABASE_URL=gestionada por Render Postgres
 LOG_CHANNEL=stderr
